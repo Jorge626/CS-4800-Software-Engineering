@@ -1,0 +1,130 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>InstaBasket</title>
+        <!-- Bootstrap Link -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link href="style.css" rel="stylesheet">
+        
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar-inverse" role="navigation">
+        <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" datatoggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="ecommerce.html">Bootstrap
+       Store</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for
+       toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbarcollapse-1">
+        </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        </nav>
+        <!-- jQuery Version 1.11.0 -->
+        <script src="js/jquery-1.11.1.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.js"></script>
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                                <a href="#" class="active dropdown-toggle" data-toggle="dropdown">Categories
+
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                        <li><a href="category.html">Fruits and Vegetables</a></li>
+                                        <li><a href="category.html">Hot and Ready Food</a></li>
+                                        <li><a href="category.html">Baked Goods</a></li>
+                                        <li><a href="category.html">Dairy</a></li>
+                                        <li><a href="category.html">Drinks</a></li>
+                                </ul>
+                        </li>
+                </ul>
+
+                
+        </div>
+
+        <div class="col-sm-8 col-md-9">
+
+                <div class="row">
+                         <div class="col-sm-6 col-md-4">
+                                 <div class="thumbnail">
+                                         <img src="placehold.it" alt="">
+                                         <div class="add-to-cart">
+                                                 <a href="#" class="glyphicon glyphicon-plus-sign" data-toggle="tooltip" data-placement="top" title="Add to cart"></a>
+                                         </div>
+                                         <div class="caption">
+                                                 <h4 class="pull-right">$0.99/lb</h4>
+                                                 <h4><a href="product.html">1 <sup>st</sup>Product</a></h4>
+                                                 <p>Fresh Apples</p>
+                                         </div>
+                                 </div>
+                         </div>
+                </div>
+        </div>
+
+
+
+
+
+
+        <!--Footer-->
+        <footer>
+                <div class="row">
+                        <div class="col-lg-12">
+                                <p>Copyright &copy; Pomona Buisness Machines</p>
+                        </div>
+                </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+{% block content %}
+
+        store contents
+
+        <center> 
+        <h1> Store Contents </h1>
+        </center>
+        {% for item in items %}
+                {% if item.getStoreID == 1 %}
+                        <div class="item_image">
+                                <img src="{% static 'hello/images/1.jpg' %}">
+                        </div>
+                        {{ item.getGroceryName }} </br>
+                        Brand: {{ item.getBrand }}
+                        Category: {{ item.getCategory }} </br>
+                        Price: ${{ item.getPrice }} </br>
+                        {% if item.getStock > 10 %}
+                                Stock: 10+ </br>
+                        {% elif item.getStock <= 0 %}
+                                Out of Stock! </br>
+                        {% else %}
+                                Stock: {{item.getStock}} </br>
+                        {% endif %}
+                {% endif %} </br>
+        {% endfor %}
+        </center>
+{% endblock %}

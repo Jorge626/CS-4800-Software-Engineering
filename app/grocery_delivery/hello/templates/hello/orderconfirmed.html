@@ -1,0 +1,72 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=0 %}
+
+<div class="container">
+        <br>
+        <center> 
+        <h1> Thank you for your order! </h1>
+        <h3> Order number: {{user_order.getPurchaseID}} </h3>
+        </center>
+        <br>
+        {% for item in user_orders %}
+                {% for ob in all_orderitems %}
+                    {% if item.getPurchaseID is ob.getPurchaseID %}
+                       {% for groc in all_items %}
+                            {% if groc.getGroceryID is ob.getGroceryID %}
+                                <div class="card">
+                                  <div class="card-header">
+                                    {{groc.getStoreName}}
+                                  </div>
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{groc.getGroceryName}}</h5>
+                                    <p class="card-text">{{groc.getPrice}}</p>
+                                  </div>
+                                </div>
+                            {%  endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        <br>
+        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Address</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ user_address.getFirstName }} {{ user_address.getLastName }}</h5>
+                <p class="card-text">{{ user_address.getStreetAddress }} <br> {{ user_address.getCity }}, {{ user_address.getState }} <br> {{ user_address.getZipCode }} <br></p>
+            </div>
+        </div>
+        <br>
+        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Payment</div>
+            <div class="card-body">
+                <h5 class="card-title">Card Number: {{ order_payment.getCardNumber}}</h5>
+                <p class="card-text">{{ order_payment.getSecurityNumber }} <br> Exp date: {{ order_payment.getExpirationDate }} <br> Zip: {{ order_payment.getZipCode }}</p>
+            </div>
+        </div>
+        <br>
+        <div class="container" style="text-align: right">
+            <br>
+            <p>Total Price: {{ totalPrice|floatformat:2 }}</p> 
+            <br>
+        </div>
+        <br>
+        <div class="container" style="text-align: right">
+            <br>
+            <a class="btn btn-primary" href="{% url 'index' %}">Continue to shop</a>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+</div>
+
+
+
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

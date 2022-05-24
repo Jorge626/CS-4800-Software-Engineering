@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+}
+
+.items_picture {
+    height: 300px;
+    width: 200px
+}
+
+.card-title {
+    font-size: 125%;
+}
+
+.padding_items {
+    padding-bottom: 1rem;
+}

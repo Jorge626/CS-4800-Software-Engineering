@@ -1,0 +1,49 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="hello/style.css" rel="stylesheet"> 
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
+<div class="container">
+        <br>
+        <center> 
+        <h1> Cart </h1>
+        </center>
+        <br>
+            {% for item in user_orders %}
+                {% for ob in all_orderitems %}
+                    {% if item.getPurchaseID is ob.getPurchaseID %}
+                       {% for groc in all_items %}
+                            {% if groc.getGroceryID is ob.getGroceryID %}
+                                <div class="card" style="width: 18rem;">
+                                  <img src="{% static groc.getDest %}" class="card-img-top" alt="...">
+                                  <div class="card-body">
+                                    <p class="card-text">{{groc.getGroceryName}}</p>
+                                    <p class="card-text">{{groc.getPrice}}</p>
+                                    <p class="card-text">{{groc.getStoreName}}</p>
+                                  </div>
+                                </div>
+                            {%  endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        <hr>
+        <div class="container" style="text-align: right">
+            <p>Total Price: {{ totalPrice|floatformat:2 }}</p> 
+            <br>
+            <a class="btn btn-primary" href="{% url 'checkout' %}">Checkout</a>
+        </div>
+        <br>
+        <br><br>
+        <br><br>
+        <br>
+</div>
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

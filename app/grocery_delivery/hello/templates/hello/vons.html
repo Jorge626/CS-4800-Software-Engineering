@@ -1,0 +1,56 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/items.css' %}"/>
+</head>
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
+<!--Store Image-->
+<div class="container">
+        <center>        
+                <img src="{% static 'hello/images/vons.png' %}">
+        </center>
+</div>
+
+<!--Categories and Search Bar-->
+{% include 'hello/snippets/searchbar_category.html' %}
+
+<body>
+
+<div class="container-fluid padding">
+<div class="row padding">
+        {% for item in items %}
+                {% if item.getStoreID == 1 %}
+                        <div class="col-md-3 padding_items">
+                        <div class="card">
+                                <img class="card-img-top items_picture" src="{% static item.getDest %}">
+                                <div class="card-body">
+                                <hr>
+                                        <h4 class="card-title">${{ item.getPrice }}</h4>
+                                        <p>{{ item.getGroceryName }} </br>
+                                        {% if item.getStock > 10 %}
+                                                Stock: 10+ </br>
+                                        {% elif item.getStock <= 0 %}
+                                                Out of Stock! </br>
+                                        {% else %}
+                                                Stock: {{item.getStock}} </br>
+                                        {% endif %}
+                                        </p>
+                                    <a class="btn btn-outline-secondary" href="{% url 'vonsAddCart' item.getGroceryID %}">Add to cart</a>
+                                </div>
+                        </div>
+                        </div>
+                {% endif %}
+        {% endfor %}
+</div>
+</div>
+
+</body>
+
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

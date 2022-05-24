@@ -1,0 +1,45 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
+    <div class="container">
+        <br>
+        {% for order in all_user_orders %}
+            <div class="card">
+              <div class="card-header">
+                Order Number: {{ order.getPurchaseID }}
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ order.getStoreName }}</h5>
+                <p class="card-text">Ordered on: {{ order.getDateTime }} </p>
+                <p class="card-text">Total Items: {{ order.getTotalItems }} </p>
+                <p class="card-text">Total Price: {{ order.getTotalPrice }}</p>
+                <p class="card-text">Deliver to: <br>{{ order.getAddress.getStreetAddress }} <br>{{ order.getAddress.getCity }}, {{ order.getAddress.getState }} {{ order.getAddress.getZipCode }}</p>
+                {% for status in order_statuses %}
+                    {% if status.getPurchaseInfoID is order.getPurchaseID %}
+                        <p class="card-text">Status: {{status.status}}</p>
+                    {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+        {% endfor %}
+        <br>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

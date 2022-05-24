@@ -1,0 +1,46 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}"/> 
+
+<body>
+    <div style="background-image: url('{% static 'hello/images/carousel0.png' %}')">
+        <div class="container-fluid text-center form_padding">
+            <div class="row_form g-0 justify-content-start">
+                <div class="col-lg-12 padding_img">
+                    <img src="{% static 'hello/images/InstaBasketLogo.PNG' %}">
+                </div>
+                <div class="col-lg-12 px-5 pt-3">
+                    <form method="POST" action="">
+                        {%csrf_token%}
+                        <h1 class="mb-3" font-weight-normal>Sign In</h1>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <input type="text" class="form-control my-4" name="username" placeholder="Username...">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <input type="password" class="form-control my-4" name="password" placeholder="Password...">
+                            </div>
+                        </div>
+                        <button class="btn1 btn-lg btn-block">Login</button>
+                    </form>
+                </div>
+
+                {% for message in messages %}
+                <p id="message" style="color: red"> {{message}} </p>
+                {% endfor %}
+
+                <div style="float: center;color:red">
+                    Don't have an account?
+                    <a href="{% url 'register' %}">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}

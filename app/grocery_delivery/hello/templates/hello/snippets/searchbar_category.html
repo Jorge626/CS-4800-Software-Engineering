@@ -1,0 +1,27 @@
+<div class="float-start">
+    <div class="dropdown" style="padding: 50px">
+  <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Categories
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    
+    <li><a class="dropdown-item" href=".">All</a></li>
+    <li><a class="dropdown-item" href="./Fruits & Vegetables">Fruits & Vegtables</a></li>
+    <li><a class="dropdown-item" href="./beverages">Beverages</a></li>
+    <li><a class="dropdown-item" href="./Breakfast & Cereal">Breakfast & Cereal</a></li>
+    <li><a class="dropdown-item" href="./Meat">Meat</a></li>
+    <li><a class="dropdown-item" href="./Pantry Essentials">Pantry Essentials</a></li>
+    <li><a class="dropdown-item" href="./Frozen Foods">Frozen Foods</a></li>
+    <li><a class="dropdown-item" href="./Cheese">Cheese</a></li>
+    <li><a class="dropdown-item" href="./Snacks">Snacks</a></li>
+    <li><a class="dropdown-item" href="./Dairy">Dairy</a></li>
+  </ul>
+</div>
+</div>
+<div class="container" style="padding: 50px">
+    <form class="d-flex" style="align-content: center" method="POST" action="./search">
+        {%csrf_token%}
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchkey">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>  

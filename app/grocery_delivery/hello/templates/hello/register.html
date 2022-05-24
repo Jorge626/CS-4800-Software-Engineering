@@ -1,0 +1,44 @@
+{% extends 'hello/base.html' %}
+
+{% block content %}
+<div class="container">
+    <br/><br/>
+    <h1>
+        Register your account
+    </h1>
+    <br/><br/>
+    <hr>
+    <br/><br/>
+    <form method="POST" action="" >
+        {% csrf_token %}
+        <div class="container overflow-hidden">
+            <div class="row gy-5">
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.username.label}}: {{form.username}}</div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.email.label}}: {{form.email}}</div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.first_name.label}}: {{form.first_name}}</div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.last_name.label}}: {{form.last_name}}</div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.password1.label}}: {{form.password1}}</div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">{{form.password2.label}}: {{form.password2}}</div>
+                </div>
+                {{form.errors}}
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </div>
+            </div> 
+        </div>
+    </form>
+</div>
+    
+    
+{% endblock %}

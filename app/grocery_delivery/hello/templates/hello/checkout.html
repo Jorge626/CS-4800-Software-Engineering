@@ -1,0 +1,73 @@
+{% extends 'hello/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Navigation -->
+{% include 'hello/snippets/navigationbar_home.html' with cartTotal=numberItems %}
+
+    <div class="container">
+        <br>
+        <center> 
+        <h1> Checkout </h1>
+        </center>
+        <br>
+        {% for item in user_orders %}
+                {% for ob in all_orderitems %}
+                    {% if item.getPurchaseID is ob.getPurchaseID %}
+                       {% for groc in all_items %}
+                            {% if groc.getGroceryID is ob.getGroceryID %}
+                                <div class="card">
+                                  <div class="card-header">
+                                    {{groc.getStoreName}}
+                                  </div>
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{groc.getGroceryName}}</h5>
+                                    <p class="card-text">{{groc.getPrice}}</p>
+                                  </div>
+                                </div>
+                            {%  endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        <div class="container" style="text-align: right">
+            <br>
+            <p>Total Price: {{ totalPrice|floatformat:2 }}</p> 
+            <br>
+        </div>
+        <center> 
+        <h2> Choose address for delivery </h2>
+        </center>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                {% for item in addresses %}
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Address</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.getFirstName }} {{ item.getLastName }}</h5>
+                        <p class="card-text">{{ item.getStreetAddress }} <br> {{ item.getCity }}, {{ item.getState }} <br> {{ item.getZipCode }} <br></p>
+                        <a class="btn btn-primary" href="{% url 'payment' item.getUserAddressID %}">Use this address</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!--Footer-->
+{% include 'hello/snippets/footer.html' %}
+{% endblock %}
